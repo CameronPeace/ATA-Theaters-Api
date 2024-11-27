@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  api:
+    container_name: ata-theaters
+    build:
+      context: .
+      dockerfile: app.dockerfile
+    working_dir: /var/api
+    volumes:
+      - ./:/var/api
+    depends_on:
+            - "database"
+  database:
+    container_name: ata-theaters_database
+    image: mysql:8.3
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+volumes:
+    dbdata:
