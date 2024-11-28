@@ -8,10 +8,8 @@ module.exports = {
             limit: req.query.limit ?? 300
         }
 
-        console.log(paramData);
         await TheaterModel.getTopTheaters(paramData.fromDate, paramData.toDate, paramData.limit)
             .then((theaterData) => {
-                console.log(theaterData);
                 return res.status(200).json({
                     status: true,
                     data: theaterData,
