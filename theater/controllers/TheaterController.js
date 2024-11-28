@@ -2,18 +2,14 @@ const TheaterModel = require("./../../common/models/Theater");
 
 module.exports = {
     getTopTheaters: async (req, res) => {
-        // const paramData = {
-        //     toDate: decodeURIComponent(req.query.toDate),
-        //     fromDate: decodeURIComponent(req.query.fromDate),
-        //     limit: req.query.limit ?? 300
-        // }
         const paramData = {
-            toDate: '2024-12-16 00:00:00',
-            fromDate: '2024-12-16 23:59:59',
+            fromDate: decodeURIComponent(req.query.fromDate),
+            toDate: decodeURIComponent(req.query.toDate),
             limit: req.query.limit ?? 300
         }
 
-         await TheaterModel.getTopTheaters(paramData.toDate, paramData.fromDate, paramData.limit)
+        console.log(paramData);
+        await TheaterModel.getTopTheaters(paramData.fromDate, paramData.toDate, paramData.limit)
             .then((theaterData) => {
                 console.log(theaterData);
                 return res.status(200).json({
